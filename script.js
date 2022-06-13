@@ -76,6 +76,8 @@ const characterData = {
 function Character(data) {
     // assign special character qualities
     Object.assign(this, data)
+    // get character's total possible health
+    this.maxHealth = this.health
     // METHODS
     // show placeholder dice initially
     this.diceArray = getDicePlaceholderHtml(this.diceCount)
@@ -84,6 +86,16 @@ function Character(data) {
         this.currentDiceScore = getDiceRollArray(this.diceCount)
         this.diceArray = this.currentDiceScore.map( num =>
             `<div class="dice">${num}</div>`).join('')
+    }
+    this.getHealthBarHtml = function() {
+        const percent = getPercentage(this.health, this.maxHealth)
+        
+        return `
+        <div class="health-bar-outer">
+            <div class="health-bar-inner ${percent < 26 ? "danger" : ""} " 
+            style="width: ${percent}%;">
+            </div>
+        </div>`
     }
     // allow the characters to be harmed
     this.takeDamage = function(attackScoreArray) {
@@ -99,11 +111,13 @@ function Character(data) {
     this.getCharacterHtml = function() {
         const { name, avatar, health, diceCount, diceArray } = this
         let diceHtml = this.getDiceHtml(diceCount)
+        const healthBar = this.getHealthBarHtml()
             return `
             <div class="characterCard">
                 <h2 class="name">${name}</h2>
                 <img class="avatar" src="${avatar}">
                 <div class="health">Health: <span class="healthStrength">${health}</span>
+                <div class="health-bar">${healthBar}</div>
                 <div class="diceContainer border-radius">
                     ${diceArray}
                 </div>
@@ -150,6 +164,9 @@ function attack() {
         endGame()
     }
 }
+
+const getPercentage = (remainingHealth, maximumHealth) =>
+    (100 * remainingHealth) / maximumHealth
 
 function endGame(){
     // determine who lost
