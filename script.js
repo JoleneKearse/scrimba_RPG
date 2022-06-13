@@ -82,15 +82,12 @@ function Character(data) {
     // display character dice after attack btn is pushed
     this.getDiceHtml = function() {
         this.currentDiceScore = getDiceRollArray(this.diceCount)
-        this.diceArray = this.currentDiceScore.map(function(num) {
-            return `<div class="dice">${num}</div>`
-        }).join('')
+        this.diceArray = this.currentDiceScore.map( num =>
+            `<div class="dice">${num}</div>`).join('')
     }
     // allow the characters to be harmed
     this.takeDamage = function(attackScoreArray) {
-        const totalAttackScore = attackScoreArray.reduce(function(total, currentRoll) {
-            return total + currentRoll
-        })
+        const totalAttackScore = attackScoreArray.reduce( (total, currentRoll) => total + currentRoll)
         this.health -= totalAttackScore
         // prevent health from going below 0
         if (this.health <= 0) {
