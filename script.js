@@ -87,8 +87,16 @@ function Character(data) {
         }).join('')
     }
     // allow the characters to be harmed
-    this.takeDamage = function() {
-        console.log(`${this.name} is damaged`)
+    this.takeDamage = function(attackScoreArray) {
+        const totalAttackScore = attackScoreArray.reduce(function(total, currentRoll) {
+            return total + currentRoll
+        })
+        this.health -= totalAttackScore
+        // prevent health from going below 0
+        if (this.health <= 0) {
+            this.dead = true
+            this.health = 0
+        }
     }
     // generate character html
     this.getCharacterHtml = function() {
@@ -137,10 +145,29 @@ function getDiceRollArray(diceCount) {
 function attack() {
     elephant.getDiceHtml()
     lion.getDiceHtml()
-    elephant.takeDamage()
-    lion.takeDamage()
+    elephant.takeDamage(lion.currentDiceScore)
+    lion.takeDamage(elephant.currentDiceScore)
     render()
+    // end game when a character dies
+    if (elephant.dead || lion.dead) {
+        endGame()
+    }
 }
+
+function endGame(){
+    // determine who lost
+    const endMessage = lion.health === 0 ? 'Elephant trumpets in victory' : elephant.health === 0 ? 'Lion roars in triumph' : 'Both animals perished'
+    // show avatar of winner
+    const victorAvatar = lion.health === 0 ? `img\\elephant.png` : `img\\lion.png`
+    // display end game content
+    document.body.innerHTML = 
+        `<div class="endGame">
+            <h2 class="gameOver">Game Over</h2>
+            <img class="victorAvatar" src="${victorAvatar}" alt="">
+            <h3 class="endMessage">${endMessage}</h3>
+        </div>`
+}
+
 
 document.getElementById('attackBtn').addEventListener('click', attack)
 

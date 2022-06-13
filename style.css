@@ -68,6 +68,19 @@ body {
     font-weight: 900;
 }
 
+.gameOver {
+    font-size: clamp(2rem, 1.2500rem + 3.3333vw, 3rem);
+    font-weight: 900;
+    background: -webkit-linear-gradient(45deg, #8E85BE, #986295, #964263);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.endMessage {
+    font-size: clamp(1.5rem, 0.9750rem + 2.3333vw, 2.2rem);
+}
+
 /* ---------- LAYOUT ----------*/
 .center {
     display: grid;
@@ -75,7 +88,8 @@ body {
     height: 100vh;
 }
 
-.container {
+.container,
+.endGame {
     min-width: 50vw;
     min-height: 50vh;
     margin: 5em 7em;
@@ -92,6 +106,11 @@ body {
 
 .characters * {
     margin-bottom: var(--gap);
+}
+
+.endGame {
+    display: grid;
+    place-items: center;
 }
 
 /* ---------- COMPONENTS ----------*/
