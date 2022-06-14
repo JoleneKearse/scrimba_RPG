@@ -84,11 +84,11 @@ function Character(data) {
         </div>`
     }
     // show placeholder dice initially
-    this.diceArray = getDicePlaceholderHtml(this.diceCount)
+    this.diceHtml = getDicePlaceholderHtml(this.diceCount)
     // display character dice after attack btn is pushed
-    this.getDiceHtml = function() {
+    this.setDiceHtml = function() {
         this.currentDiceScore = getDiceRollArray(this.diceCount)
-        this.diceArray = this.currentDiceScore.map( num =>
+        this.diceHtml = this.currentDiceScore.map( num =>
             `<div class="dice">${num}</div>`).join('')
     }
     // allow the characters to be harmed
@@ -103,8 +103,7 @@ function Character(data) {
     }
     // generate character html
     this.getCharacterHtml = function() {
-        const { name, avatar, health, diceCount, diceArray } = this
-        let diceHtml = this.getDiceHtml(diceCount)
+        const { name, avatar, health, diceCount, diceHtml } = this
         const healthBar = this.getHealthBarHtml()
             return `
             <div class="characterCard">
@@ -113,7 +112,7 @@ function Character(data) {
                 <div class="health">Health: <span class="healthStrength">${health}</span>
                 <div class="health-bar">${healthBar}</div>
                 <div class="diceContainer border-radius">
-                    ${diceArray}
+                    ${diceHtml}
                 </div>
             </div>`
     }
@@ -149,8 +148,8 @@ const getPercentage = (remainingHealth, maximumHealth) =>
     (100 * remainingHealth) / maximumHealth
 
 function attack() {
-    elephant.getDiceHtml()
-    antagonist.getDiceHtml()
+    elephant.setDiceHtml()
+    antagonist.setDiceHtml()
     elephant.takeDamage(antagonist.currentDiceScore)
     antagonist.takeDamage(elephant.currentDiceScore)
     render()
@@ -171,15 +170,13 @@ function attack() {
 }
 
 function getDicePlaceholderHtml(diceCount) {
-    return new Array(diceCount).fill(0).map(function() {
-        return '<div class="placeholderDice"></div>'
-    }).join('')
+    return new Array(diceCount).fill(0).map( () => 
+    '<div class="placeholderDice"></div>').join('')
 }
 
 function getDiceRollArray(diceCount) {
-    return new Array(diceCount).fill(0).map(function(){
-        return Math.floor(Math.random() * 6) + 1
-    })
+    return new Array(diceCount).fill(0).map( () => 
+        Math.floor(Math.random() * 6) + 1)
 }
 
 function disableAttackBtn() {
