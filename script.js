@@ -78,7 +78,7 @@ class Character {
     
     // METHODS
     // display health bar as percentage remaining
-    getHealthBarHtml = function() {
+    getHealthBarHtml() {
         const percent = getPercentage(this.health, this.maxHealth)
         
         return `
@@ -89,13 +89,13 @@ class Character {
         </div>`
     }
     // display character dice after attack btn is pushed
-    setDiceHtml = function() {
+    setDiceHtml() {
         this.currentDiceScore = getDiceRollArray(this.diceCount)
         this.diceHtml = this.currentDiceScore.map( num =>
             `<div class="dice">${num}</div>`).join('')
     }
     // allow the characters to be harmed
-    takeDamage = function(attackScoreArray) {
+    takeDamage(attackScoreArray) {
         const totalAttackScore = attackScoreArray.reduce( (total, currentRoll) => total + currentRoll)
         this.health -= totalAttackScore
         // prevent health from going below 0
@@ -105,7 +105,7 @@ class Character {
         }
     }
     // generate character html
-    getCharacterHtml = function() {
+    getCharacterHtml() {
         const { name, avatar, health, diceCount, diceHtml } = this
         const healthBar = this.getHealthBarHtml()
             return `
