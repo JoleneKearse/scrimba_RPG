@@ -1,45 +1,45 @@
+// antagonist array
+let antagonistArray = ['polarBear', 'monkey', 'dog']
+
 // CHARACTER DATA
 const characterData = {
-    protagonist: {
+    elephant: {
         name: "Elephant",
         avatar: "img/elephant.png",
-        health: 60,
+        health: 100,
         diceCount: 3,
         currentDiceScore: []
     },
-    antagonist: {
+    lion: {
         name: "Lion",
         avatar: "img/lion.png",
-        health: 60,
-        diceCount: 3,
+        health: 50,
+        diceCount: 2,
         currentDiceScore: []
+    },
+    polarBear: {
+        name: "Polar Bear",
+        avatar: "img/polar_bear.png",
+        health: 60,
+        diceCount: 3
+    },
+    monkey: {
+        name: "Monkey",
+        avatar: "img/monkey.png",
+        health: 15,
+        diceCount: 1
+    },
+    dog: {
+        name: "Dog",
+        avatar: "img/dog.png",
+        health: 15,
+        diceCount: 1
     }
 }
 
 // const cowChar  = {
 //     name: "Cow",
 //     avatar: "img/cow.png",
-//     health: 60,
-//     diceCount: 3
-// }
-
-// const elephantChar  = {
-//     name: "Elephant",
-//     avatar: "img/elephant.png",
-//     health: 60,
-//     diceCount: 3
-// }
-
-// const lionChar  = {
-//     name: "Lion",
-//     avatar: "img/lion.png",
-//     health: 60,
-//     diceCount: 3
-// }
-
-// const monkeyChar  = {
-//     name: "Monkey",
-//     avatar: "img/monkey.png",
 //     health: 60,
 //     diceCount: 3
 // }
@@ -58,20 +58,6 @@ const characterData = {
 //     diceCount: 3
 // }
 
-// const polarBearChar  = {
-//     name: "Polar Bear",
-//     avatar: "img/polar_bear.png",
-//     health: 60,
-//     diceCount: 3
-// }
-
-// const dogChar  = {
-//     name: "Dog",
-//     avatar: "img/dog.png",
-//     health: 60,
-//     diceCount: 3
-// }
-
 // CHARACTER CONSTRUCTOR
 function Character(data) {
     // assign special character qualities
@@ -79,14 +65,7 @@ function Character(data) {
     // get character's total possible health
     this.maxHealth = this.health
     // METHODS
-    // show placeholder dice initially
-    this.diceArray = getDicePlaceholderHtml(this.diceCount)
-    // display character dice after attack btn is pushed
-    this.getDiceHtml = function() {
-        this.currentDiceScore = getDiceRollArray(this.diceCount)
-        this.diceArray = this.currentDiceScore.map( num =>
-            `<div class="dice">${num}</div>`).join('')
-    }
+    // display health bar as percentage remaining
     this.getHealthBarHtml = function() {
         const percent = getPercentage(this.health, this.maxHealth)
         
@@ -96,6 +75,14 @@ function Character(data) {
             style="width: ${percent}%;">
             </div>
         </div>`
+    }
+    // show placeholder dice initially
+    this.diceArray = getDicePlaceholderHtml(this.diceCount)
+    // display character dice after attack btn is pushed
+    this.getDiceHtml = function() {
+        this.currentDiceScore = getDiceRollArray(this.diceCount)
+        this.diceArray = this.currentDiceScore.map( num =>
+            `<div class="dice">${num}</div>`).join('')
     }
     // allow the characters to be harmed
     this.takeDamage = function(attackScoreArray) {
@@ -127,8 +114,8 @@ function Character(data) {
 
 // INITIALIZE CHARACTERS
 // const cow = new Character(cowChar)
-const elephant = new Character(characterData.protagonist)
-const lion = new Character(characterData.antagonist)
+const elephant = new Character(characterData.elephant)
+let antagonist = getNewAntagonist()
 // const monkey = new Character(monkeyChar)
 // const penguin = new Character(penguinChar)
 // const pig = new Character(pigChar)
@@ -136,9 +123,36 @@ const lion = new Character(characterData.antagonist)
 // const dog = new Character(dogChar)
 
 // FUNCTIONS
+function getNewAntagonist() {
+    const nextAntagonistData = characterData[antagonistArray.shift()]
+    return nextAntagonistData ? new Character(nextAntagonistData) : {}
+}
+
 function render() {
     document.getElementById('protagonist').innerHTML = elephant.getCharacterHtml()
-    document.getElementById('antagonist').innerHTML = lion.getCharacterHtml()
+    document.getElementById('antagonist').innerHTML = antagonist.getCharacterHtml()
+}
+
+const getPercentage = (remainingHealth, maximumHealth) =>
+    (100 * remainingHealth) / maximumHealth
+
+function attack() {
+    elephant.getDiceHtml()
+    antagonist.getDiceHtml()
+    elephant.takeDamage(antagonist.currentDiceScore)
+    antagonist.takeDamage(elephant.currentDiceScore)
+    render()
+    // end game when the protagonist dies, add more antagonists until they run out
+    if (elephant.dead) {
+        endGame()
+    } else if (antagonist.dead) {
+        if (antagonistArray.length > 0) {
+            antagonist = getNewAntagonist()
+            render()
+        } else {
+            endGame()
+        }
+    }
 }
 
 function getDicePlaceholderHtml(diceCount) {
@@ -153,26 +167,11 @@ function getDiceRollArray(diceCount) {
     })
 }
 
-function attack() {
-    elephant.getDiceHtml()
-    lion.getDiceHtml()
-    elephant.takeDamage(lion.currentDiceScore)
-    lion.takeDamage(elephant.currentDiceScore)
-    render()
-    // end game when a character dies
-    if (elephant.dead || lion.dead) {
-        endGame()
-    }
-}
-
-const getPercentage = (remainingHealth, maximumHealth) =>
-    (100 * remainingHealth) / maximumHealth
-
 function endGame(){
     // determine who lost
-    const endMessage = lion.health === 0 ? 'Elephant trumpets in victory' : elephant.health === 0 ? 'Lion roars in triumph' : 'Both animals perished'
+    const endMessage = antagonist.health === 0 ? 'Elephant trumpets in victory' : elephant.health === 0 ? 'Lion roars in triumph' : 'Both animals perished'
     // show avatar of winner
-    const victorAvatar = lion.health === 0 ? `img\\elephant.png` : `img\\lion.png`
+    const victorAvatar = antagonist.health === 0 ? `img\\elephant.png` : `img\\lion.png`
     // display end game content
     document.body.innerHTML = 
         `<div class="endGame">
@@ -182,7 +181,8 @@ function endGame(){
         </div>`
 }
 
-
+// EVENT LISTENER
 document.getElementById('attackBtn').addEventListener('click', attack)
 
+// BEGIN THE GAME
 render()
