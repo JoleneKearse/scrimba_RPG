@@ -197,5 +197,9 @@ button {
     background-color: #964263;
 }
 
+#attackBtn:disabled {
+    opacity: .6;
+}
+
 /* ---------- MEDIA QUERIES ----------*/
 

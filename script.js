@@ -1,5 +1,8 @@
-// antagonist array
+// global variables
 let antagonistArray = ['polarBear', 'monkey', 'dog']
+const attackBtn = document.getElementById('attackBtn')
+
+
 
 // CHARACTER DATA
 const characterData = {
@@ -37,6 +40,8 @@ const characterData = {
     }
 }
 
+
+
 // const cowChar  = {
 //     name: "Cow",
 //     avatar: "img/cow.png",
@@ -57,6 +62,8 @@ const characterData = {
 //     health: 60,
 //     diceCount: 3
 // }
+
+
 
 // CHARACTER CONSTRUCTOR
 function Character(data) {
@@ -112,6 +119,8 @@ function Character(data) {
     }
 }
 
+
+
 // INITIALIZE CHARACTERS
 // const cow = new Character(cowChar)
 const elephant = new Character(characterData.elephant)
@@ -122,6 +131,8 @@ let antagonist = getNewAntagonist()
 // const polarBear = new Character(polarBearChar)
 // const dog = new Character(dogChar)
 
+
+
 // FUNCTIONS
 function getNewAntagonist() {
     const nextAntagonistData = characterData[antagonistArray.shift()]
@@ -129,6 +140,7 @@ function getNewAntagonist() {
 }
 
 function render() {
+    attackBtn.disabled = false
     document.getElementById('protagonist').innerHTML = elephant.getCharacterHtml()
     document.getElementById('antagonist').innerHTML = antagonist.getCharacterHtml()
 }
@@ -147,8 +159,11 @@ function attack() {
         endGame()
     } else if (antagonist.dead) {
         if (antagonistArray.length > 0) {
-            antagonist = getNewAntagonist()
-            render()
+            disableAttackBtn()
+            setTimeout( () => {
+                antagonist = getNewAntagonist()
+                render()
+            }, 1000)
         } else {
             endGame()
         }
@@ -167,22 +182,29 @@ function getDiceRollArray(diceCount) {
     })
 }
 
+function disableAttackBtn() {
+    attackBtn.disabled = true
+}
+
 function endGame(){
+    disableAttackBtn()
     // determine who lost
     const endMessage = antagonist.health === 0 ? 'Elephant trumpets in victory' : elephant.health === 0 ? 'Lion roars in triumph' : 'Both animals perished'
     // show avatar of winner
     const victorAvatar = antagonist.health === 0 ? `img\\elephant.png` : `img\\lion.png`
     // display end game content
-    document.body.innerHTML = 
-        `<div class="endGame">
-            <h2 class="gameOver">Game Over</h2>
-            <img class="victorAvatar" src="${victorAvatar}" alt="">
-            <h3 class="endMessage">${endMessage}</h3>
-        </div>`
+    setTimeout( () => {
+        document.body.innerHTML = 
+            `<div class="endGame">
+                <h2 class="gameOver">Game Over</h2>
+                <img class="victorAvatar" src="${victorAvatar}" alt="">
+                <h3 class="endMessage">${endMessage}</h3>
+            </div>`
+    }, 1500)
 }
 
 // EVENT LISTENER
-document.getElementById('attackBtn').addEventListener('click', attack)
+attackBtn.addEventListener('click', attack)
 
 // BEGIN THE GAME
 render()
