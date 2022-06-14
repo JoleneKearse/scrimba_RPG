@@ -65,15 +65,20 @@ const characterData = {
 
 
 
-// CHARACTER CONSTRUCTOR
-function Character(data) {
-    // assign special character qualities
-    Object.assign(this, data)
-    // get character's total possible health
-    this.maxHealth = this.health
+// CHARACTER CLASS
+class Character {
+    constructor(data) {
+        // assign special character qualities
+        Object.assign(this, data)
+        // get character's total possible health
+        this.maxHealth = this.health
+        // show placeholder dice initially
+        this.diceHtml = getDicePlaceholderHtml(this.diceCount)
+    }
+    
     // METHODS
     // display health bar as percentage remaining
-    this.getHealthBarHtml = function() {
+    getHealthBarHtml = function() {
         const percent = getPercentage(this.health, this.maxHealth)
         
         return `
@@ -83,16 +88,14 @@ function Character(data) {
             </div>
         </div>`
     }
-    // show placeholder dice initially
-    this.diceHtml = getDicePlaceholderHtml(this.diceCount)
     // display character dice after attack btn is pushed
-    this.setDiceHtml = function() {
+    setDiceHtml = function() {
         this.currentDiceScore = getDiceRollArray(this.diceCount)
         this.diceHtml = this.currentDiceScore.map( num =>
             `<div class="dice">${num}</div>`).join('')
     }
     // allow the characters to be harmed
-    this.takeDamage = function(attackScoreArray) {
+    takeDamage = function(attackScoreArray) {
         const totalAttackScore = attackScoreArray.reduce( (total, currentRoll) => total + currentRoll)
         this.health -= totalAttackScore
         // prevent health from going below 0
@@ -102,7 +105,7 @@ function Character(data) {
         }
     }
     // generate character html
-    this.getCharacterHtml = function() {
+    getCharacterHtml = function() {
         const { name, avatar, health, diceCount, diceHtml } = this
         const healthBar = this.getHealthBarHtml()
             return `
