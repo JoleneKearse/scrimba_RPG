@@ -236,3 +236,19 @@ button {
         gap: .25rem;
     }
 }
+@media (min-height: 320px) and (max-height: 640px) and (orientation: landscape) {
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        width: 100%;
+    }
+    .characterCard {
+        width: 30vw;
+        padding: .5em 0;
+    }
+    #attackBtn {
+        margin-left: 1.5em;
+    }
+}
