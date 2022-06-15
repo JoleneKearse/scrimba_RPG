@@ -245,6 +245,9 @@ button {
     }
 }
 @media (min-height: 320px) and (max-height: 640px) and (orientation: landscape) {
+    body {
+        overflow: auto;
+    }
     .container {
         display: flex;
         justify-content: center;
