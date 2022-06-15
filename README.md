@@ -17,3 +17,5 @@ This [module](https://scrimba.com/learn/frontend/next-level-javascript-intro-cQg
 - **setTimeout()** to improve the UI
 
 I made it my own by making it **responsive** and adding a **Reset button**.
+
+[Live Preview](https://jolenekearse.github.io/scrimba_RPG/)
