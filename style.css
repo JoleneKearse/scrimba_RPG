@@ -59,7 +59,6 @@ body {
     text-align: center;
     line-height: 1.2;
     color: var(--clr-white);
-    overflow: auto;
 }
 
 /* ---------- TYPOGRAPHY ----------*/
@@ -233,6 +232,7 @@ button {
 }
 
 /* ---------- MEDIA QUERIES ----------*/
+/* for larger screens */
 @media (max-width: 700px) {
     .container {
         width: 90%;
@@ -249,10 +249,9 @@ button {
         gap: .25rem;
     }
 }
-@media (min-height: 320px) and (max-height: 860px) and (orientation: landscape) {
-    body {
-        overflow: auto;
-    }
+
+/* for mobile landscape */
+@media (min-height: 320px) and (max-height: 860px) and (max-width: 900px) and (orientation: landscape) {
     .container {
         display: flex;
         justify-content: center;
@@ -271,6 +270,8 @@ button {
         padding: 1em 4em 2em 4em;
     }
 }
+
+/* for dark scheme preference */
 @media (prefers-color-scheme: dark) {
     body {
         height: 100%;
