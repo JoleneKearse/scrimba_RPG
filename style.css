@@ -244,7 +244,7 @@ button {
         gap: .25rem;
     }
 }
-@media (min-height: 320px) and (max-height: 640px) and (orientation: landscape) {
+@media (min-height: 320px) and (max-height: 860px) and (orientation: landscape) {
     body {
         overflow: auto;
     }
@@ -268,6 +268,7 @@ button {
 }
 @media (prefers-color-scheme: dark) {
     body {
+        height: 100%;
         background-image: 
         linear-gradient(155deg, #3E8893, #2C938C, #2D9B77, #46A158, #6FA236, #9F9E17, #3E8893, #2C938C, #2D9B77, #46A158, #6FA236, #9F9E17), url(img/background.png);
     }
