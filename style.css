@@ -91,12 +91,6 @@ body {
 
 .container,
 .endGame {
-    /* width: 450px;
-    height: 600px;
-    min-width: 40vw;
-    max-width: 90vw;
-    min-height: 50vh;
-    max-height: 90vh; */
     margin-inline: auto;
     color: var(--clr-black);
     background-color: #DCF3EC73;
@@ -119,7 +113,6 @@ body {
     width: 35vw;
     max-width: 40vw;
     padding: clamp(1em, 0.2500em + 3.3333vw, 2em);
-    border: 1px solid purple;
 }
 
 .avatar {
@@ -265,5 +258,8 @@ button {
     }
     #attackBtn {
         margin-left: 1.5em;
+    }
+    .endGame {
+        padding: 1em 4em 2em 4em;
     }
 }
