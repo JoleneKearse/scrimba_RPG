@@ -273,7 +273,7 @@ button {
 
 /* for dark scheme preference */
 @media (prefers-color-scheme: dark) {
-    body {
+    html {
         height: 100%;
         background-image: 
         linear-gradient(155deg, #3E8893, #3C83A2, #557BAA, #776FA6, #966193, #A95575, #3E8893, #3C83A2, #557BAA, #776FA6, #966193, #A95575), url(img/background.png);
