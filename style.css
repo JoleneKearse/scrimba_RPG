@@ -266,3 +266,9 @@ button {
         padding: 1em 4em 2em 4em;
     }
 }
+@media (prefers-color-scheme: dark) {
+    body {
+        background-image: 
+        linear-gradient(155deg, #3E8893, #2C938C, #2D9B77, #46A158, #6FA236, #9F9E17, #3E8893, #2C938C, #2D9B77, #46A158, #6FA236, #9F9E17), url(img/background.png);
+    }
+}
