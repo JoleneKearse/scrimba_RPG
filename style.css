@@ -42,20 +42,22 @@ img {
     max-width: 100%;
 }
 
+html {
+    min-height: 100%;
+    background-color: var(--clr-accent-blue);
+    background-image: 
+        linear-gradient(155deg, #98E2ED, #86EDE6, #87F5D1, #A0FBB2, #C9FC90, #F9F871, #98E2ED, #86EDE6, #87F5D1, #A0FBB2, #C9FC90, #F9F871), url(img/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 body {
-    height: 100vh;
-    max-height: 120vh;
     font-family: 'Gentium Plus', serif;
     font-size: clamp(1rem, 0.6250rem + 1.6667vw, 1.5rem);
     font-weight: 400;
     text-align: center;
     line-height: 1.2;
     color: var(--clr-white);
-    background-color: var(--clr-accent-blue);
-    background-image: 
-        linear-gradient(155deg, #98E2ED, #86EDE6, #87F5D1, #A0FBB2, #C9FC90, #F9F871, #98E2ED, #86EDE6, #87F5D1, #A0FBB2, #C9FC90, #F9F871), url(img/background.png);
-    background-repeat: no-repeat;
-    background-size: cover;
     overflow: hidden;
 }
 
