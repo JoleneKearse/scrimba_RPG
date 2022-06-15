@@ -228,3 +228,11 @@ button {
         width: 40vw;
     }
 }
+@media (max-width: 330px) {
+    .avatar {
+        width: 90%;
+    }
+    .diceContainer {
+        gap: .25rem;
+    }
+}
