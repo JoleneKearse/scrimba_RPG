@@ -1,6 +1,7 @@
 // global variables
 let antagonistArray = ['polarBear', 'monkey', 'dog']
 const attackBtn = document.getElementById('attackBtn')
+const resetBtn = document.getElementById('resetBtn')
 
 
 
@@ -9,7 +10,7 @@ const characterData = {
     elephant: {
         name: "Elephant",
         avatar: "img/elephant.png",
-        health: 100,
+        health: 80,
         diceCount: 3,
         currentDiceScore: []
     },
@@ -124,14 +125,9 @@ class Character {
 
 
 // INITIALIZE CHARACTERS
-// const cow = new Character(cowChar)
 const elephant = new Character(characterData.elephant)
 let antagonist = getNewAntagonist()
-// const monkey = new Character(monkeyChar)
-// const penguin = new Character(penguinChar)
-// const pig = new Character(pigChar)
-// const polarBear = new Character(polarBearChar)
-// const dog = new Character(dogChar)
+
 
 
 
@@ -195,12 +191,19 @@ function endGame(){
     // display end game content
     setTimeout( () => {
         document.body.innerHTML = 
-            `<div class="endGame">
-                <h2 class="gameOver">Game Over</h2>
-                <img class="victorAvatar" src="${victorAvatar}" alt="">
-                <h3 class="endMessage">${endMessage}</h3>
+            `<div class="center border-radius">
+                <div class="endGame">
+                    <h2 class="gameOver">Game Over</h2>
+                    <img class="victorAvatar" src="${victorAvatar}" alt="">
+                    <h3 class="endMessage">${endMessage}</h3>
+                    <button class="border-radius" id="resetBtn" onclick="resetGame()">Reset</button>
+                </div>
             </div>`
     }, 1500)
+}
+
+function resetGame() {
+    location.reload()
 }
 
 // EVENT LISTENER

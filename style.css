@@ -59,7 +59,8 @@ body {
 
 /* ---------- TYPOGRAPHY ----------*/
 .name,
-#attackBtn {
+#attackBtn,
+#resetBtn {
     font-size: clamp(1rem, 0.0625rem + 4.1667vw, 2.25rem);
     font-weight: 900;
     letter-spacing: .25rem;
@@ -115,7 +116,7 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-    width: 30vw;
+    width: 35vw;
     max-width: 40vw;
     padding: clamp(1em, 0.2500em + 3.3333vw, 2em);
     border: 1px solid purple;
@@ -132,9 +133,7 @@ body {
 }
 
 /* ---------- COMPONENTS ----------*/
-button {
-    cursor: pointer;
-}
+
 
 .avatar {
     border-radius: 50%;
@@ -193,12 +192,16 @@ button {
     text-align: center;
 }
 
-#attackBtn {
-    display: inline-block;
+button {
+    cursor: pointer;
     padding: .25em .5em;
     border: .3rem solid var(--clr-black);
     margin-bottom: var(--gap-med);
     color: var(--clr-white);
+}
+
+#attackBtn {
+    display: inline-block;
     background-image:
         linear-gradient(45deg, #8E85BE, #986295, #964263);
     transition: background-image 1000ms, box-shadow 500ms;
@@ -211,12 +214,24 @@ button {
     box-shadow: .5rem .5rem 5px #324B4F4D;
 }
 
-#attackBtn:active {
-    background-color: #964263;
-}
-
 #attackBtn:disabled {
     opacity: .6;
+}
+
+#resetBtn {
+    color: #324B4FE6;
+    background-image:
+        linear-gradient(45deg, #86EDE6, #A0FBB2, #F9F871);
+    margin-top: var(--gap-med);
+    margin-bottom: var(--gap);
+    transition: background-image 1000ms, box-shadow 500ms;
+}
+
+#resetBtn:hover,
+#resetBtn:focus {
+    background-image:
+        linear-gradient(45deg, #F9F871, #A0FBB2, #86EDE6);
+    box-shadow: .5rem .5rem 5px #324B4F4D;
 }
 
 /* ---------- MEDIA QUERIES ----------*/
