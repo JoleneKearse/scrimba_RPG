@@ -49,6 +49,7 @@ html {
         linear-gradient(155deg, #98E2ED, #86EDE6, #87F5D1, #A0FBB2, #C9FC90, #F9F871, #98E2ED, #86EDE6, #87F5D1, #A0FBB2, #C9FC90, #F9F871), url(img/background.png);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 body {
@@ -58,7 +59,6 @@ body {
     text-align: center;
     line-height: 1.2;
     color: var(--clr-white);
-    overflow: hidden;
 }
 
 /* ---------- TYPOGRAPHY ----------*/
