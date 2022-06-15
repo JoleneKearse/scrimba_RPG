@@ -270,6 +270,20 @@ button {
     body {
         height: 100%;
         background-image: 
-        linear-gradient(155deg, #3E8893, #2C938C, #2D9B77, #46A158, #6FA236, #9F9E17, #3E8893, #2C938C, #2D9B77, #46A158, #6FA236, #9F9E17), url(img/background.png);
+        linear-gradient(155deg, #3E8893, #3C83A2, #557BAA, #776FA6, #966193, #A95575, #3E8893, #3C83A2, #557BAA, #776FA6, #966193, #A95575), url(img/background.png);
+    }
+    .container,
+    .endGame {
+        color: var(--clr-white);
+        background-color: #324B4F73;
+    }
+    .dice {
+        color: var(--clr-white);
+        background-color: var(--clr-black);
+    }
+    .gameOver {
+        background: -webkit-linear-gradient(45deg, #86EDE6, #A0FBB2, #F9F871);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }
